@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.smyfinancial.com/schema/desensitize"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.smyfinancial.com/schema/desensitize https://smy-test.oss-cn-shenzhen.aliyuncs.com/desensitize.xsd">
+
+    <table name="test_sensitives" selectFromEncryptedTable="false">
+        <column name="sensitive_field" original="true"/>
+        <column name="hive_table" minimumMatch="2" original="true"/>
+    </table>
+
+</config>

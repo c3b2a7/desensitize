@@ -1,0 +1,5 @@
+# Project exclude paths
+/desensitize-core/target/
+/desensitize-mybatis32/target/
+/desensitize-mybatis34/target/
+/druid-shaded/target/

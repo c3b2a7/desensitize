@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.smyfinancial.com/schema/desensitize"
+            xmlns="http://www.smyfinancial.com/schema/desensitize">
+
+    <xsd:element name="config">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                    <xsd:element ref="table"/>
+                </xsd:choice>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="table">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                    <xsd:element ref="column"/>
+                </xsd:choice>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[唯一的表名]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="selectFromEncryptedTable" type="xsd:boolean" default="false">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[是否走加密表查询]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="tableNameCaseInsensitive" type="xsd:boolean" default="true">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[表名是否大小写不敏感]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="column">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="xsd:string" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[唯一的列名]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="original" type="xsd:boolean" default="false">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[是否属于原始表的配置]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="minimumMatch" type="xsd:integer">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[最小匹配长度]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="regex" type="xsd:boolean" default="false">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[是否为正则表达式]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

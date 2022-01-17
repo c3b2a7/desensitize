@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.smyfinancial.com/schema/desensitize"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.smyfinancial.com/schema/desensitize desensitize.xsd">
+
+    <table name="table1">
+        <column name="column1" original="true" minimumMatch="1"/> <!--原始表写加密值，字段存在like查询场景，最小匹配长度1-->
+        <column name="column2" original="true"/> <!--原始表写加密值-->
+    </table>
+    <table name="table2" selectFromEncryptedTable="true">
+        <column name="column3" original="true"/> <!--原始表写加密值，加密表同样写加密值-->
+        <column name="column4" original="true"/> <!--原始表写加密值，加密表同样写加密值-->
+        <column name="column5"/> <!--加密表写加密值-->
+    </table>
+    <table name="table3" selectFromEncryptedTable="true">
+        <column name="column6"/> <!--加密表写加密值-->
+        <column name="column7"/> <!--加密表写加密值-->
+    </table>
+    <table name="table4" selectFromEncryptedTable="true">
+        <column name="column1_\d{4}_\d{2}" regex="true"/> <!--正则表达式-->
+        <column name="column2_\d{4}_\d{2}" original="true" regex="true"/> <!--正则表达式-->
+        <column name="column3_\d{4}_\d{2}" original="true" minimumMatch="4" regex="true"/> <!--正则表达式-->
+    </table>
+</config>

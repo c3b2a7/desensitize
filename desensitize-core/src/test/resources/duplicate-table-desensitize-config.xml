@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.smyfinancial.com/schema/desensitize"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.smyfinancial.com/schema/desensitize desensitize.xsd">
+
+    <!--duplicate table configuration-->
+    <table name="table1"/>
+    <table name="table1"/>
+</config>
