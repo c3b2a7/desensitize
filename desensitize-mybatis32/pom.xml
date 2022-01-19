@@ -11,10 +11,6 @@
 
     <artifactId>desensitize-mybatis32</artifactId>
 
-    <properties>
-        <mybatis.version>3.2.2</mybatis.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>me.lolico.desensitize</groupId>
@@ -24,7 +20,7 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>${mybatis.version}</version>
+            <version>${mybatis32.version}</version>
         </dependency>
 
         <dependency>

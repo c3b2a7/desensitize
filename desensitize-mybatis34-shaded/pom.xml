@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>desensitize-mybatis32-shaded</artifactId>
+    <artifactId>desensitize-mybatis34-shaded</artifactId>
 
     <dependencies>
         <dependency>
@@ -17,13 +17,13 @@
         </dependency>
         <dependency>
             <groupId>me.lolico.desensitize</groupId>
-            <artifactId>desensitize-mybatis32</artifactId>
+            <artifactId>desensitize-mybatis34</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>${mybatis32.version}</version>
+            <version>${mybatis34.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>
