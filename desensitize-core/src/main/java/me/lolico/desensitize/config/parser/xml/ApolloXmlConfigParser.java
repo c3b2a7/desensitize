@@ -20,12 +20,12 @@ public class ApolloXmlConfigParser extends AbstractXmlConfigParser {
     private static final String APOLLO_PREFIX = "apollo:";
 
     @Override
-    protected String getPrefix() {
+    public String getIdentity() {
         return APOLLO_PREFIX;
     }
 
     @Override
-    protected InputStream newInputStream(String namespace) throws IOException {
+    protected InputStream getInputStream(String namespace) throws IOException {
         ConfigFile configFile = ConfigService.getConfigFile(namespace, ConfigFileFormat.XML);
         if (configFile == null) {
             throw new IOException("apollo resource [" + namespace + "] cannot be resolved because it does not exist");

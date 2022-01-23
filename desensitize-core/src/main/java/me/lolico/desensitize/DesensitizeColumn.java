@@ -9,8 +9,6 @@ public class DesensitizeColumn {
     private boolean original;
     // 最小匹配长度（like分词长度）
     private int minimumMatch;
-    // 是否为正则表达式
-    private boolean regex;
 
     public String getName() {
         return name;
@@ -34,14 +32,6 @@ public class DesensitizeColumn {
 
     public void setMinimumMatch(int minimumMatch) {
         this.minimumMatch = minimumMatch;
-    }
-
-    public boolean isRegex() {
-        return regex;
-    }
-
-    public void setRegex(boolean regex) {
-        this.regex = regex;
     }
 
     @Override

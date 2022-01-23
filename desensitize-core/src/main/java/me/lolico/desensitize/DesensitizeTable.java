@@ -1,18 +1,17 @@
 package me.lolico.desensitize;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class DesensitizeTable {
     // 表名
     private String name;
     // 从加密表查询
     private boolean selectFromEncryptedTable;
-    // 表名是否区分大小写 ( 默认大小写不敏感）
-    private boolean tableNameCaseInsensitive = true;
-
-    public DesensitizeTable(String name) {
-        this.name = name;
-    }
+    // 表名是否大小写铭感
+    private boolean tableNameCaseSensitive = true;
+    // 是否为正则表达式
+    private boolean regex;
 
     public String getName() {
         return name;
@@ -30,19 +29,36 @@ public class DesensitizeTable {
         this.selectFromEncryptedTable = selectFromEncryptedTable;
     }
 
-    public boolean isTableNameCaseInsensitive() {
-        return tableNameCaseInsensitive;
+    public boolean isTableNameCaseSensitive() {
+        return tableNameCaseSensitive;
     }
 
-    public void setTableNameCaseInsensitive(boolean tableNameCaseInsensitive) {
-        this.tableNameCaseInsensitive = tableNameCaseInsensitive;
+    public void setTableNameCaseSensitive(boolean tableNameCaseSensitive) {
+        this.tableNameCaseSensitive = tableNameCaseSensitive;
+    }
+
+    public boolean isRegex() {
+        return regex;
+    }
+
+    public void setRegex(boolean regex) {
+        this.regex = regex;
     }
 
     /**
-     * 根据大小写敏感判断是否同一张表
+     * 根据大小写敏感和正则判断是否同一张表
      */
     public boolean isSameTable(String tableName) {
-        return tableNameCaseInsensitive ? name.equalsIgnoreCase(tableName) : name.equals(tableName);
+        if (isRegex()) {
+            Pattern pattern;
+            if (tableNameCaseSensitive) {
+                pattern = Pattern.compile(name);
+            } else {
+                pattern = Pattern.compile(name, Pattern.CASE_INSENSITIVE);
+            }
+            return pattern.matcher(tableName).matches();
+        }
+        return tableNameCaseSensitive ? name.equals(tableName) : name.equalsIgnoreCase(tableName);
     }
 
     // 不可能存在一个表名相同，但一个区分大小写一个不区分

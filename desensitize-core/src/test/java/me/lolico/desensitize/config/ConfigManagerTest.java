@@ -3,7 +3,7 @@ package me.lolico.desensitize.config;
 import me.lolico.desensitize.DesensitizeColumn;
 import me.lolico.desensitize.DesensitizeRule;
 import me.lolico.desensitize.DesensitizeTable;
-import me.lolico.desensitize.config.parser.IllegalConfigException;
+import me.lolico.desensitize.config.parser.ParseException;
 import me.lolico.desensitize.config.parser.xml.ClasspathXmlConfigParser;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -36,19 +36,25 @@ public class ConfigManagerTest {
     public void duplicateConfigShouldThrowIllegalConfigException() {
         Assertions.assertThatThrownBy(() -> {
             ConfigManager.load("classpath:duplicate-table-desensitize-config.xml");
-        }).getRootCause().isInstanceOf(IllegalConfigException.class);
+        }).hasCauseInstanceOf(ParseException.class);
         Assertions.assertThatThrownBy(() -> {
             ConfigManager.load("classpath:duplicate-column-desensitize-config.xml");
-        }).getRootCause().isInstanceOf(IllegalConfigException.class);
+        }).hasCauseInstanceOf(ParseException.class);
     }
 
     @Test
-    public void regexTest() throws Exception {
+    public void regexTest() {
         ClasspathXmlConfigParser parser = new ClasspathXmlConfigParser();
-        Map<DesensitizeTable, List<DesensitizeColumn>> config = parser.parse("classpath:desensitize-config.xml");
-        List<DesensitizeColumn> columns = config.get(new DesensitizeTable("table4"));
-        for (DesensitizeColumn column : columns) {
-            Assertions.assertThat(column.isRegex()).isTrue();
+        Map<DesensitizeTable, List<DesensitizeColumn>> config = parser.parse("classpath:regex-desensitize-config.xml");
+        for (DesensitizeTable table : config.keySet()) {
+            Assertions.assertThat(table.isRegex()).isTrue();
+            if (table.isTableNameCaseSensitive()) {
+                Assertions.assertThat(table.isSameTable("table_0")).isTrue();
+                Assertions.assertThat(table.isSameTable("TABLE_0")).isFalse();
+            } else {
+                Assertions.assertThat(table.isSameTable("table_2022_01")).isTrue();
+                Assertions.assertThat(table.isSameTable("TABLE_2022_01")).isTrue();
+            }
         }
     }
 }

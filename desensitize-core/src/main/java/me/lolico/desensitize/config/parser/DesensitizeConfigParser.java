@@ -10,5 +10,5 @@ public interface DesensitizeConfigParser {
 
     boolean support(String config);
 
-    Map<DesensitizeTable, List<DesensitizeColumn>> parse(String config) throws Exception;
+    Map<DesensitizeTable, List<DesensitizeColumn>> parse(String config) throws ParseException;
 }

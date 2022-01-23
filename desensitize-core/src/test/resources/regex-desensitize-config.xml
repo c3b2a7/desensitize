@@ -2,9 +2,12 @@
 <config xmlns="http://lolico.me/schema/desensitize"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://lolico.me/schema/desensitize desensitize.xsd">
-    <!--duplicate column configuration-->
-    <table name="table1">
-        <column name="column1"/>
-        <column name="column1"/>
+    <!--regex-->
+    <table name="table_\d{4}_\d{2}" tableNameCaseSensitive="false" regex="true">
+        <column name="column" />
+    </table>
+    <!--regex, case sensitive-->
+    <table name="table_\d{1}"  regex="true">
+        <column name="column" />
     </table>
 </config>

@@ -13,12 +13,12 @@ public class ClasspathXmlConfigParser extends AbstractXmlConfigParser {
     private static final String CLASSPATH_PREFIX = "classpath:";
 
     @Override
-    protected String getPrefix() {
+    public String getIdentity() {
         return CLASSPATH_PREFIX;
     }
 
     @Override
-    protected InputStream newInputStream(String path) throws IOException {
+    protected InputStream getInputStream(String path) throws IOException {
         ClassLoader cl = getDefaultClassLoader();
         InputStream inputStream = cl != null ? cl.getResourceAsStream(path) : ClassLoader.getSystemResourceAsStream(path);
         if (inputStream == null) {
