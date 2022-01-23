@@ -12,7 +12,9 @@ import me.lolico.desensitize.SqlContext;
 import me.lolico.desensitize.codec.AesCodec;
 import me.lolico.desensitize.codec.Codec;
 import me.lolico.desensitize.codec.Decoder;
+import me.lolico.desensitize.codec.IdentityCipher;
 import me.lolico.desensitize.config.ConfigManager;
+import me.lolico.desensitize.util.AllUtils;
 import me.lolico.desensitize.visitor.MySqlConditionVisitor;
 import me.lolico.desensitize.visitor.MySqlTableStatsVisitor;
 import me.lolico.desensitize.visitor.stat.Column;
@@ -421,7 +423,7 @@ public class DesensitizeInterceptor implements Interceptor {
         if (aesKey == null) {
             throw new IllegalArgumentException("aesKey is required");
         }
-        this.codec = new AesCodec(aesKey);
+        this.codec = new AesCodec(new IdentityCipher(AllUtils.DEFAULT_IDENTITY, aesKey));
         ConfigManager.load(configPath);
     }
 

@@ -5,16 +5,17 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class AesCodec extends AbstractCodec {
+public class AesCodec extends IdentityCodec {
 
     private final String aesKey;
 
-    public AesCodec(String aesKey) {
-        this.aesKey = aesKey;
+    public AesCodec(IdentityCipher cipher) {
+        super(cipher.getIdentity());
+        this.aesKey = cipher.getCipher();
     }
 
     @Override
-    public String encode(String source) {
+    public String encodeWithoutIdentity(String source) {
         try {
             Cipher cipher = Cipher.getInstance("AES");
             byte[] keyBytes = Base64.getDecoder().decode(aesKey);
@@ -27,7 +28,7 @@ public class AesCodec extends AbstractCodec {
     }
 
     @Override
-    public String decode(String encoded) {
+    public String decodeWithoutIdentity(String encoded) {
         try {
             Cipher cipher = Cipher.getInstance("AES");
             byte[] keyBytes = Base64.getDecoder().decode(aesKey);

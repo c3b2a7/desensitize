@@ -597,10 +597,7 @@ public class DecryptResultSetHandler extends DefaultResultSetHandler {
 
     private Object decryptValue(Object value) {
         try {
-            String[] encodeArr = value.toString().split("_");
-            if (encodeArr.length >= 4 && encodeArr[0].equals("E")) {
-                value = decoder.decode(value.toString());
-            }
+            value = decoder.decode(value.toString());
         } catch (Throwable ex) {
             logger.error("decrypt value failed", ex);
             throw ex;

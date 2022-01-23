@@ -11,7 +11,9 @@ import me.lolico.desensitize.LikeMeta;
 import me.lolico.desensitize.SqlContext;
 import me.lolico.desensitize.codec.AesCodec;
 import me.lolico.desensitize.codec.Codec;
+import me.lolico.desensitize.codec.IdentityCipher;
 import me.lolico.desensitize.config.ConfigManager;
+import me.lolico.desensitize.util.AllUtils;
 import me.lolico.desensitize.visitor.MySqlConditionVisitor;
 import me.lolico.desensitize.visitor.MySqlTableStatsVisitor;
 import me.lolico.desensitize.visitor.stat.Column;
@@ -409,7 +411,7 @@ public class DesensitizeInterceptor implements Interceptor {
         if (aesKey == null) {
             throw new IllegalArgumentException("aesKey is required");
         }
-        this.codec = new AesCodec(aesKey);
+        this.codec = new AesCodec(new IdentityCipher(AllUtils.DEFAULT_IDENTITY, aesKey));
         ConfigManager.load(configPath);
     }
 
@@ -451,9 +453,7 @@ public class DesensitizeInterceptor implements Interceptor {
 
             // 字段支持密文like，进行处理
             if (DesensitizeRule.supportLike(table, columnName)) {
-
                 LikeMeta likeMeta = new LikeMeta(column, expr);
-
                 sqlContext.addLikeMeta(likeMeta);
             }
         }
