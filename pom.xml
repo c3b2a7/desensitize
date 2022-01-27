@@ -13,6 +13,7 @@
         <module>desensitize-mybatis32-shaded</module>
         <module>desensitize-mybatis34</module>
         <module>desensitize-mybatis34-shaded</module>
+        <module>desensitize-boot</module>
     </modules>
 
     <description>desensitize framework for data persistence</description>
