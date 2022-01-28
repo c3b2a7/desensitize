@@ -33,8 +33,8 @@ public class AesCodec extends IdentityCodec {
             Cipher cipher = Cipher.getInstance("AES");
             byte[] keyBytes = Base64.getDecoder().decode(aesKey);
             cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(keyBytes, "AES"));
-            byte[] source = cipher.doFinal(encoded.getBytes(StandardCharsets.UTF_8));
-            return new String(Base64.getDecoder().decode(source));
+            byte[] source = cipher.doFinal(Base64.getDecoder().decode(encoded));
+            return new String(source, StandardCharsets.UTF_8);
         } catch (Exception e) {
             throw new RuntimeException("aes算法加密异常->" + e.getMessage());
         }
