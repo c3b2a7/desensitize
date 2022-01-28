@@ -111,7 +111,9 @@ public class DecryptResultSetHandler extends FastResultSetHandler {
 
     private Object decryptValue(Object value) {
         try {
-            value = decoder.decode(value.toString());
+            if (value instanceof String) {
+                value = decoder.decode((String) value);
+            }
         } catch (Throwable ex) {
             logger.error("decrypt value failed", ex);
             throw ex;
