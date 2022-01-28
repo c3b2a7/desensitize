@@ -17,20 +17,28 @@ public class MybatisInterceptorProperties {
     }
 
     public Properties getProperties() {
+        if (config == null) {
+            throw new IllegalStateException("desensitize.config is not configure");
+        }
         Properties properties = new Properties();
         properties.put("config", config.toString());
+        properties.put("aesKey", config.getAesKey());
         return properties;
     }
 
     static class Config {
         /**
-         * 配置类型
+         * The identity for desensitize config.
          */
         private Identity identity;
         /**
-         * 配置位置
+         * Desensitize config location.
          */
         private String location;
+        /**
+         * The aes key is used to desensitization.
+         */
+        private String aesKey;
 
         public Identity getIdentity() {
             return identity;
@@ -46,6 +54,14 @@ public class MybatisInterceptorProperties {
 
         public void setLocation(String location) {
             this.location = location;
+        }
+
+        public String getAesKey() {
+            return aesKey;
+        }
+
+        public void setAesKey(String aesKey) {
+            this.aesKey = aesKey;
         }
 
         @Override
