@@ -1,12 +1,11 @@
 package me.lolico.desensitize.codec;
 
-public interface Codec {
-    String encode(String source);
+public interface Codec<S, R> {
+    R encode(S source);
 
-    String decode(String encoded);
+    S decode(R encoded);
 
-    Encoder getEncoder();
+    Encoder<S, R> getEncoder();
 
-    Decoder getDecoder();
-
+    Decoder<R, S> getDecoder();
 }

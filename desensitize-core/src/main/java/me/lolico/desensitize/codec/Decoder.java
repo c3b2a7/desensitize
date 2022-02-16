@@ -2,11 +2,11 @@ package me.lolico.desensitize.codec;
 
 import java.util.function.Function;
 
-public interface Decoder extends Function<String, String> {
-    String decode(String encoded);
+public interface Decoder<IN, OUT> extends Function<IN, OUT> {
+    OUT decode(IN encoded);
 
     @Override
-    default String apply(String s) {
+    default OUT apply(IN s) {
         return decode(s);
     }
 }

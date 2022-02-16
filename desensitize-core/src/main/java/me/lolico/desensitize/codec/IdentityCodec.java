@@ -1,6 +1,6 @@
 package me.lolico.desensitize.codec;
 
-public abstract class IdentityCodec extends AbstractCodec {
+public abstract class IdentityCodec extends AbstractCodec<String, String> {
 
     protected final String identity;
 

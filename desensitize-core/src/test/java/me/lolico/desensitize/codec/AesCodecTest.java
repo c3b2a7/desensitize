@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class AesCodecTest {
 
-    private Codec codec;
+    private Codec<String, String> codec;
     private String original;
 
     @Before
